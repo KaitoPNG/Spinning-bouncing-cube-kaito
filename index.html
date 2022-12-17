@@ -1,0 +1,165 @@
+<html>
+  <head>
+    <title>Spinning Cube Kaito</title>
+    <style>
+      /* Add some style to the DVD logo */
+      img#dvd {
+        width: 100px;
+        height: 100px;
+        position: absolute;
+      }
+
+      /* Set the background color of the page to black */
+      body {
+        background-color: black;
+      }
+
+      /* Style the party mode button */
+      button#party-mode {
+        position: absolute;
+        bottom: 10px;
+        right: 10px;
+        padding: 10px 20px;
+        font-size: 14px;
+        border: none;
+        border-radius: 5px;
+        background-color: lightblue;
+      }
+
+      /* Add a shake animation */
+      @keyframes shake {
+        0% {
+          transform: translate(0);
+        }
+        10% {
+          transform: translate(-10px, 0);
+        }
+        20% {
+          transform: translate(10px, 0);
+        }
+        30% {
+          transform: translate(-10px, 0);
+        }
+        40% {
+          transform: translate(10px, 0);
+        }
+        50% {
+          transform: translate(-10px, 0);
+        }
+        60% {
+          transform: translate(10px, 0);
+        }
+        70% {
+          transform: translate(-10px, 0);
+        }
+        80% {
+          transform: translate(10px, 0);
+        }
+        90% {
+          transform: translate(-10px, 0);
+        }
+        100% {
+          transform: translate(0);
+        }
+      }
+
+      /* Apply the shake animation to the body when needed */
+      body.shake {
+        animation: shake 0.5s;
+      }
+    </style>
+  </head>
+  <body>
+    <img id="dvd" src="C:\Users\Kaito\Desktop\HTML websites\spinning cube kaito bouncing\images\cubekai.png">
+    <button id="party-mode">Party mode</button>
+    <audio id="music" src="C:\Users\Kaito\Desktop\HTML websites\spinning cube kaito bouncing\music\partymode.mp3"></audio>
+    <script>
+      // Get the DVD logo, party mode button, and music elements
+      const dvd = document.getElementById('dvd');
+      const partyModeButton = document.getElementById('party-mode');
+      const music = document.getElementById('music');
+
+      // Set the initial position and velocity of the DVD logo
+      let x = 0;
+      let y = 0;
+      let vx = 5;
+      let vy = 5;
+
+      // Set the size of the screen
+      const screenWidth = window.innerWidth;
+      const screenHeight = window.innerHeight;
+
+      // Set the size of the DVD logo
+      const dvdWidth = dvd.offsetWidth;
+      const dvdHeight = dvd.offsetHeight;
+
+      // Set the initial rotation angle of
+
+      // Set the initial rotation angle of the DVD logo
+      let angle = 0;
+
+      // Animate the DVD logo
+      function animate() {
+        // Update the position of the DVD logo based on its velocity
+        x += vx;
+        y += vy;
+
+        // Check if the DVD logo has hit a wall
+        if (x + dvdWidth > screenWidth || x < 0) {
+          // Reverse the velocity in the x direction
+          vx *= -1;
+        }
+        if (y + dvdHeight > screenHeight
+|| y < 0) {
+          // Reverse the velocity in the y direction
+          vy *= -1;
+        }
+
+        // Increment the rotation angle
+        angle += 10;
+
+        // Set the new position and rotation of the DVD logo
+        dvd.style.left = x + 'px';
+        dvd.style.top = y + 'px';
+        dvd.style.transform = 'rotate(' + angle + 'deg)';
+
+        // Animate again after a short delay
+        requestAnimationFrame(animate);
+      }
+
+      // Start the animation
+      animate();
+
+      // Add a click event listener to the party mode button
+      partyModeButton.addEventListener('click', function() {
+        // Set the body's background color to a random
+        // Play the music
+        music.play();
+
+        // Set an interval to change the background color every second
+        const interval = setInterval(function() {
+          // Generate a random color
+          const r = Math.floor(Math.random() * 256);
+          const g = Math.floor(Math.random() * 256);
+          const b = Math.floor(Math.random() * 256);
+          const color = 'rgb(' + r + ',' + g + ',' + b + ')';
+
+          // Set the body's background color to the random color
+          document.body.style.background = color;
+        }, 1000);
+
+        // Add a click event listener to the party mode button to turn off party mode
+        partyModeButton.addEventListener('click', function() {
+          // Set the body's background color to black
+          document.body.style.background = 'black';
+
+          // Stop the music
+          music.pause();
+
+          // Clear the interval
+          clearInterval(interval);
+        });
+      });
+    </script>
+  </body>
+</html>
